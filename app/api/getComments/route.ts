@@ -1,10 +1,22 @@
-export const dynamic = 'force-static'
- 
+import { google } from "googleapis";
+const youtube = google.youtube({version: "v3", auth: process.env.API_KEY});
+
 export async function GET() {
-  const res = await fetch('https://data.mongodb-api.com/...', {
-    
-  })
-  const data = await res.json()
- 
-  return Response.json({ data })
+  getComments();
+  return Response.json({ h: "hi" })
+}
+
+
+const getComments = async () => {
+  const response = await youtube.commentThreads.list(
+    {
+      "part": [
+        "snippet,replies"
+      ],
+      "videoId": "4TLE4RLjf-4",
+      maxResults: 100,
+      order: "time"
+    }
+  )
+  console.log(response.data.items?.[0].snippet?.topLevelComment?.snippet?.textDisplay);
 }
