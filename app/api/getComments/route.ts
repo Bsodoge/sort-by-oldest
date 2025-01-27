@@ -2,7 +2,17 @@ import { google } from "googleapis";
 const youtube = google.youtube({version: "v3", auth: process.env.API_KEY});
 
 export async function GET() {
-  getComments("4TLE4RLjf-4");
+  let allComments: any[] = [];
+  let currToken: any = "";
+  let { comments, pageToken } = await getComments("Gu_etr834FM");
+  allComments = allComments.concat(comments);
+  currToken = pageToken;
+  while(currToken) {
+    let { comments , pageToken } = await getComments("Gu_etr834FM");
+     allComments = allComments.concat(comments)
+     currToken = pageToken; 
+  }
+  console.log(allComments.length);
   return Response.json({ h: "hi" })
 }
 
@@ -19,5 +29,5 @@ const getComments = async (videoId: string, pageToken = "") => {
       order: "time"
     }
   )
-  console.log(response.data.items?.[0].snippet?.topLevelComment?.snippet?.textDisplay);
+  return {comments: response.data.items, pageToken: response.data.nextPageToken};
 }
