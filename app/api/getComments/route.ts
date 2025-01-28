@@ -4,14 +4,20 @@ const youtube = google.youtube({version: "v3", auth: process.env.API_KEY});
 export async function GET() {
   let allComments: any[] = [];
   let currToken: any = "";
-  let { comments, pageToken } = await getComments("Gu_etr834FM");
+  let { comments, pageToken } = await getComments("gnn0vAc8KuI");
   allComments = allComments.concat(comments);
   currToken = pageToken;
+  let fetch = 1;
   while(currToken) {
-    let { comments , pageToken } = await getComments("Gu_etr834FM");
-     allComments = allComments.concat(comments)
-     currToken = pageToken; 
+    console.log(currToken, " ", fetch)
+    let { comments , pageToken } = await getComments("gnn0vAc8KuI", currToken);
+    allComments = allComments.concat(comments)
+    currToken = pageToken; 
+    fetch++;
   }
+  //for(let i = 0; i < allComments.length; i++){
+    //console.log(allComments[i].snippet);
+  //}
   console.log(allComments.length);
   return Response.json({ h: "hi" })
 }
