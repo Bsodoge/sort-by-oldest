@@ -1,16 +1,17 @@
 import { google } from "googleapis";
 const youtube = google.youtube({version: "v3", auth: process.env.API_KEY});
 
-export async function GET() {
+export async function GET(req: Request) {
+  let { videoId } = await req.json();
   let allComments: any[] = [];
   let currToken: any = "";
-  let { comments, pageToken } = await getComments("gnn0vAc8KuI");
+  let { comments, pageToken } = await getComments(videoId);
   allComments = allComments.concat(comments);
   currToken = pageToken;
   let fetch = 1;
   while(currToken) {
     console.log(currToken, " ", fetch)
-    let { comments , pageToken } = await getComments("gnn0vAc8KuI", currToken);
+    let { comments , pageToken } = await getComments(videoId, currToken);
     allComments = allComments.concat(comments)
     currToken = pageToken; 
     fetch++;
@@ -19,7 +20,7 @@ export async function GET() {
     //console.log(allComments[i].snippet);
   //}
   console.log(allComments.length);
-  return Response.json({ h: "hi" })
+  return Response.json({ allComments })
 }
 
 
