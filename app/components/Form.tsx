@@ -1,16 +1,24 @@
 'use client'
 
-import { useState } from "react"
+import { FormEvent, FormEventHandler, useState } from "react"
 
 export default function Form() {
     const [link, setLink] = useState("");
-    const submit = (args: any) => {
-        console.log(args)
+    const [load, setLoad] = useState(false);
+    const submit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setLoad(true);
+        const response = await fetch("/api/getComments", {
+            method: "POST",
+            body: JSON.stringify({videoId: link})
+        });
+        setLoad(false);
+        console.log(response)
     }
     return (
         <form onSubmit={submit} className="flex flex-col">
-            <input type="text" value={link} onChange={e => setLink(e.target.value)} required />
-            <button>Retrieve comments</button>
+            <input type="text" value={link} onChange={e => setLink(e.target.value)} className="text-black" required />
+            { load ? <></> : <button>Retrieve comments</button> }
         </form>
     )
 }

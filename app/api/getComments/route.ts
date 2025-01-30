@@ -1,7 +1,7 @@
 import { google } from "googleapis";
 const youtube = google.youtube({version: "v3", auth: process.env.API_KEY});
 
-export async function GET(req: Request) {
+export async function POST(req: Request) {
   let { videoId } = await req.json();
   let allComments: any[] = [];
   let currToken: any = "";
@@ -16,9 +16,6 @@ export async function GET(req: Request) {
     currToken = pageToken; 
     fetch++;
   }
-  //for(let i = 0; i < allComments.length; i++){
-    //console.log(allComments[i].snippet);
-  //}
   console.log(allComments.length);
   return Response.json({ allComments })
 }
