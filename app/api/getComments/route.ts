@@ -1,7 +1,31 @@
+import { Ratelimit } from "@upstash/ratelimit";
+import { ipAddress } from "@vercel/functions";
+import { kv } from "@vercel/kv";
 import { google } from "googleapis";
 const youtube = google.youtube({version: "v3", auth: process.env.API_KEY});
 
+const rateLimit = new Ratelimit({
+  redis: kv,
+  limiter: Ratelimit.slidingWindow(1, '10s')
+})
+
+export const config = {
+  runtime: 'edge'
+}
+
 export async function POST(req: Request) {
+  const ip = ipAddress(req) ?? "127.0.0.1";
+  const { limit, reset, remaining } = await rateLimit.limit(ip);
+  if(remaining === 0) {
+    return Response.json({ message: "Rate limit exceeded "}, {
+      status: 429,
+      headers: {
+        "X-RateLimit-Limit": limit.toString(),
+        "X-RateLimit-Remaining": remaining.toString(),
+        "X-RateLimit-Reset": reset.toString()
+      }
+    })
+  }
   let { videoId } = await req.json();
   let allComments: any[] = [];
   let currToken: any = "";
