@@ -2,12 +2,13 @@ import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
 import { ipAddress } from "@vercel/functions";
 import { google } from "googleapis";
+import moment from "moment";
 
 const youtube = google.youtube({version: "v3", auth: process.env.API_KEY});
 
 const rateLimit = new Ratelimit({
   redis: Redis.fromEnv(),
-  limiter: Ratelimit.slidingWindow(1, '10s'),
+  limiter: Ratelimit.slidingWindow(1, '60s'),
   timeout: 10000
 })
 
@@ -39,7 +40,8 @@ export async function POST(req: Request) {
     currToken = pageToken; 
     fetch++;
   }
-  console.log(allComments.length);
+  allComments.sort((a, b) => moment(a.snippet.topLevelComment.snippet.publishedAt) - moment(b.snippet.topLevelComment.snippet.publishedAt));
+  console.log(allComments);
   return Response.json({ allComments })
 }
 

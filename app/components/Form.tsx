@@ -2,7 +2,7 @@
 
 import { FormEvent,  useState } from "react"
 
-export default function Form() {
+export default function Form({ setComments }: any) {
     const [link, setLink] = useState("");
     const [load, setLoad] = useState(false);
     const [error, setError] = useState(false);
@@ -20,7 +20,8 @@ export default function Form() {
             body: JSON.stringify({videoId})
         });
         setLoad(false);
-        console.log(response)
+        const { allComments }= await response.json();
+        setComments(allComments);
     }
     return (
         <form onSubmit={submit} className="flex flex-col w-[20rem] h-20">
