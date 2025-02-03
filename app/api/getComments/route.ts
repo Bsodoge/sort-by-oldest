@@ -13,6 +13,7 @@ const rateLimit = new Ratelimit({
 })
 
 export async function POST(req: Request) {
+
   const ip = ipAddress(req) ?? "127.0.0.1";
   const { success, pending, limit, reset, remaining } = await rateLimit.limit(ip);
   console.log(success, limit, reset, remaining)
@@ -27,6 +28,13 @@ export async function POST(req: Request) {
     })
   }
   let { videoId } = await req.json();
+  let re = /(https?:\/\/)?(((m|www)\.)?(youtube(-nocookie)?|youtube.googleapis)\.com.*(v\/|v=|vi=|vi\/|e\/|embed\/|user\/.*\/u\/\d+\/)|youtu\.be\/)([_0-9a-z-]+)/i;
+  videoId = videoId.match(re)![8];
+  if(!videoId) {
+    return Response.json({ message: "Bad data"}, {
+      status: 400,
+    })
+  }
   let allComments: any[] = [];
   let currToken: any = "";
   let { comments, pageToken } = await getComments(videoId);
@@ -40,7 +48,7 @@ export async function POST(req: Request) {
     currToken = pageToken; 
     fetch++;
   }
-  allComments.sort((a, b) => moment(a.snippet.topLevelComment.snippet.publishedAt) - moment(b.snippet.topLevelComment.snippet.publishedAt));
+  allComments.sort((a, b) => moment(a.snippet.topLevelComment.snippet.publishedAt).valueOf() - moment(b.snippet.topLevelComment.snippet.publishedAt).valueOf());
   console.log(allComments);
   return Response.json({ allComments })
 }

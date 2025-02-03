@@ -8,20 +8,25 @@ export default function Form({ setComments }: any) {
     const [error, setError] = useState(false);
     const submit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        let re = /(https?:\/\/)?(((m|www)\.)?(youtube(-nocookie)?|youtube.googleapis)\.com.*(v\/|v=|vi=|vi\/|e\/|embed\/|user\/.*\/u\/\d+\/)|youtu\.be\/)([_0-9a-z-]+)/i;
-        let videoId = link.match(re)![8]; //https://stackoverflow.com/questions/3452546/how-do-i-get-the-youtube-video-id-from-a-url/51870158#51870158
-        if(!videoId) {
-            setError(true);
-            return;
+        try {
+            setError(false);
+            let re = /(https?:\/\/)?(((m|www)\.)?(youtube(-nocookie)?|youtube.googleapis)\.com.*(v\/|v=|vi=|vi\/|e\/|embed\/|user\/.*\/u\/\d+\/)|youtu\.be\/)([_0-9a-z-]+)/i;
+            let videoId = link.match(re); //https://stackoverflow.com/questions/3452546/how-do-i-get-the-youtube-video-id-from-a-url/51870158#51870158
+            if(!videoId) {
+                setError(true);
+                return;
+            }
+            setLoad(true);
+            const response = await fetch("/api/getComments", {
+                method: "POST",
+                body: JSON.stringify({videoId})
+            });
+            setLoad(false);
+            const { allComments }= await response.json();
+            setComments(allComments);
+        } catch (error) {
+            setError(true);    
         }
-        setLoad(true);
-        const response = await fetch("/api/getComments", {
-            method: "POST",
-            body: JSON.stringify({videoId})
-        });
-        setLoad(false);
-        const { allComments }= await response.json();
-        setComments(allComments);
     }
     return (
         <form onSubmit={submit} className="flex flex-col w-[20rem] h-20">
