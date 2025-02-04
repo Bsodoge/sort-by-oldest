@@ -11,7 +11,7 @@ export default function Form({ setComments }: any) {
         try {
             setError(false);
             let re = /(https?:\/\/)?(((m|www)\.)?(youtube(-nocookie)?|youtube.googleapis)\.com.*(v\/|v=|vi=|vi\/|e\/|embed\/|user\/.*\/u\/\d+\/)|youtu\.be\/)([_0-9a-z-]+)/i;
-            let videoId = link.match(re); //https://stackoverflow.com/questions/3452546/how-do-i-get-the-youtube-video-id-from-a-url/51870158#51870158
+            let videoId = link.match(re)![8]; //https://stackoverflow.com/questions/3452546/how-do-i-get-the-youtube-video-id-from-a-url/51870158#51870158
             if(!videoId) {
                 setError(true);
                 return;
@@ -19,7 +19,7 @@ export default function Form({ setComments }: any) {
             setLoad(true);
             const response = await fetch("/api/getComments", {
                 method: "POST",
-                body: JSON.stringify({videoId})
+                body: JSON.stringify({link})
             });
             setLoad(false);
             const { allComments }= await response.json();

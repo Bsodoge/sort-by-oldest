@@ -1,20 +1,18 @@
 export default function Comment({ content, publishedAt, author, likes, profileImage }: any) {
     return(
-        <div className="">
-            <div className="">
-                <img src={profileImage} alt="profile" />
+        <div className="flex gap-8 w-1/2 border p-2">
+            <img src={profileImage} alt="No Profile Found" className="aspect-square" />
+            <div className="flex flex-col gap-4">
+                <div className="flex">
+                    <div className="">{ author }</div>
+                    <div className="">{ publishedAt }</div>
+                </div>
                 <div className="">
-                    <div className="">
-                        <div className="">{ author }</div>
-                        <div className="">{ publishedAt }</div>
-                    </div>
-                    <div className="">
-                        <div className="">{ content }</div>
-                    </div>
-                    <div className="">
-                        <div className="">{ likes }</div>
-                        <div className="">replies</div>
-                    </div>
+                    <div className="">{ content }</div>
+                </div>
+                <div className="flex gap-4">
+                    <div className="">{ likes } likes</div>
+                    <div className="">replies</div>
                 </div>
             </div>
         </div>

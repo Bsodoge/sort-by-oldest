@@ -16,7 +16,6 @@ export async function POST(req: Request) {
 
   const ip = ipAddress(req) ?? "127.0.0.1";
   const { success, pending, limit, reset, remaining } = await rateLimit.limit(ip);
-  console.log(success, limit, reset, remaining)
   if(!success) {
     return Response.json({ message: "Rate limit exceeded "}, {
       status: 429,
@@ -27,9 +26,9 @@ export async function POST(req: Request) {
       }
     })
   }
-  let { videoId } = await req.json();
+  let { link } = await req.json();
   let re = /(https?:\/\/)?(((m|www)\.)?(youtube(-nocookie)?|youtube.googleapis)\.com.*(v\/|v=|vi=|vi\/|e\/|embed\/|user\/.*\/u\/\d+\/)|youtu\.be\/)([_0-9a-z-]+)/i;
-  videoId = videoId.match(re)![8];
+  let videoId = link.match(re)![8];
   if(!videoId) {
     return Response.json({ message: "Bad data"}, {
       status: 400,
