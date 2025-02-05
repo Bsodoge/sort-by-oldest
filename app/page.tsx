@@ -19,7 +19,8 @@ export default function Home() {
         <Form setComments={setComments}></Form>
         <div className="flex flex-col gap-16 p-10 items-center">
           {
-            comments.length ? comments.map((comment: any) => <Comment 
+            comments.length ? comments.map((comment: any) => <Comment
+            key={comment.id} 
             content={comment.snippet.topLevelComment.snippet.textDisplay} 
             publishedAt={comment.snippet.topLevelComment.snippet.updatedAt}
             author={comment.snippet.topLevelComment.snippet.authorDisplayName}

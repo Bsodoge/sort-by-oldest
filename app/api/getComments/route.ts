@@ -1,8 +1,8 @@
 import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
 import { ipAddress } from "@vercel/functions";
+import dayjs from "dayjs";
 import { google } from "googleapis";
-import moment from "moment";
 
 const youtube = google.youtube({version: "v3", auth: process.env.API_KEY});
 
@@ -47,7 +47,7 @@ export async function POST(req: Request) {
     currToken = pageToken; 
     fetch++;
   }
-  allComments.sort((a, b) => moment(a.snippet.topLevelComment.snippet.publishedAt).valueOf() - moment(b.snippet.topLevelComment.snippet.publishedAt).valueOf());
+  allComments.sort((a, b) => dayjs(a.snippet.topLevelComment.snippet.publishedAt).valueOf() - dayjs(b.snippet.topLevelComment.snippet.publishedAt).valueOf());
   console.log(allComments);
   return Response.json({ allComments })
 }
