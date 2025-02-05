@@ -17,7 +17,7 @@ export default function Home() {
           <h2>Find comments from a <em className="italic">long</em> time ago...</h2>
         </div>
         <Form setComments={setComments}></Form>
-        <div className="flex flex-col gap-16 p-10 justify-center items-center">
+        <div className="flex flex-col gap-16 p-10 items-center">
           {
             comments.length ? comments.map((comment: any) => <Comment 
             content={comment.snippet.topLevelComment.snippet.textDisplay} 
