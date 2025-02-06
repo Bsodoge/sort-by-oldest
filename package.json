@@ -9,11 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/html-to-text": "^9.0.4",
     "@upstash/ratelimit": "^2.0.5",
     "@upstash/redis": "^1.34.3",
     "@vercel/functions": "^1.6.0",
     "dayjs": "^1.11.13",
     "googleapis": "^144.0.0",
+    "html-to-text": "^9.0.5",
     "next": "15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

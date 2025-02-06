@@ -19,3 +19,35 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.icons {
+  width: 17px;
+  height: 17px;
+}
+
+.thumbs_up{
+  background: no-repeat url("../public/old_youtube_icons.png") -285px 0;
+  background-color: rgba(0, 0, 0, 0);
+  background-position-x: -285px;
+  background-position-y: 0px;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-image: url("../public/old_youtube_icons.png");
+  background-size: auto;
+  background-origin: padding-box;
+  background-clip: border-box;
+}
+
+.thumbs_up:hover{
+  background: no-repeat url("../public/old_youtube_icons.png") -90px -69px;
+  background-color: rgba(0, 0, 0, 0);
+  background-position-x: -90px;
+  background-position-y: -69px;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-image: url("../public/old_youtube_icons.png");
+  background-size: auto;
+  background-origin: padding-box;
+  background-clip: border-box;
+  cursor: pointer;
+}
