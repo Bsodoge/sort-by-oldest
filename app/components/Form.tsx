@@ -32,7 +32,7 @@ export default function Form({ setComments }: any) {
         <form onSubmit={submit} className="flex flex-col w-[20rem] h-20">
             { error ? <span className="text-center">Please enter a valid youtube URL</span> : <></> }
             <input type="text" value={link} onChange={e => setLink(e.target.value)} className="text-black" required />
-            { load ? <></> : <button>Retrieve comments</button> }
+            { load ? <></> : <button className="button">Retrieve comments</button> }
         </form>
     )
 }

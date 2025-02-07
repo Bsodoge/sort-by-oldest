@@ -17,7 +17,7 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 .icons {
@@ -50,4 +50,21 @@ body {
   background-origin: padding-box;
   background-clip: border-box;
   cursor: pointer;
+}
+
+.button{
+  @apply  px-10 py-2 border m-5 rounded-sm border-[#d3d3d3];
+  text-shadow: 0 1px 0 rgba(255,255,255,.5);
+  background-image: linear-gradient(to bottom,#fcfcfc 0,#f8f8f8 100%);
+}
+
+.button:hover {
+  background-image: linear-gradient(to bottom,#f8f8f8 0,#eee 100%);
+}
+
+.button:active{
+  border-color: #c6c6c6;
+  background-color: #e9e9e9;
+  background-image: none;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.20);
 }
