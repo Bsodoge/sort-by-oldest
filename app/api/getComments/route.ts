@@ -40,13 +40,13 @@ export async function POST(req: Request) {
   allComments = allComments.concat(comments);
   currToken = pageToken;
   let fetch = 1;
-  while(currToken) {
+/*   while(currToken) {
     console.log(currToken, " ", fetch)
     let { comments , pageToken } = await getComments(videoId, currToken);
     allComments = allComments.concat(comments)
     currToken = pageToken; 
     fetch++;
-  }
+  } */
   allComments.sort((a, b) => dayjs(a.snippet.topLevelComment.snippet.publishedAt).valueOf() - dayjs(b.snippet.topLevelComment.snippet.publishedAt).valueOf());
   console.log(allComments);
   return Response.json({ allComments })
@@ -61,7 +61,7 @@ const getComments = async (videoId: string, pageToken = "") => {
       ],
       videoId,
       pageToken,
-      maxResults: 100,
+      maxResults: 10,
       order: "time"
     }
   )
