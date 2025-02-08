@@ -24,14 +24,22 @@ export default function Form({ setComments }: any) {
             setLoad(false);
             const { allComments }= await response.json();
             setComments(allComments);
+            console.log(allComments)
         } catch (error) {
             setError(true);    
         }
     }
     return (
-        <form onSubmit={submit} className="flex flex-col w-[20rem] h-20">
-            { error ? <span className="text-center">Please enter a valid youtube URL</span> : <></> }
-            <input type="text" value={link} onChange={e => setLink(e.target.value)} className="text-black" required />
+        <form onSubmit={submit} className="flex flex-col w-[20rem] h-20 gap-4">
+            { 
+                error ? 
+                <div className="bg-[#a93630] border-[#a11b1b] text-white px-1 py-2 flex items-center gap-4 rounded-sm">
+                    <div className="error-icon"></div>
+                    <span>Please enter a valid youtube URL</span>
+                </div> 
+                : <></> 
+            }
+            <input type="text" value={link} onChange={e => setLink(e.target.value)} className="text-black py-2 px-2 border-[#dedede] border-2 text-lg" required />
             { load ? <></> : <button className="button">Retrieve comments</button> }
         </form>
     )

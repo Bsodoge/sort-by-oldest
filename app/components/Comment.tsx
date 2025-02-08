@@ -6,13 +6,13 @@ import Image from "next/image";
 export default function Comment({ content, publishedAt, author, likes, profileImage }: any) {
     dayjs.extend(relativeTime);
     return(
-        <div className="flex gap-8 bg-white border p-4 w-1/2 max-w-3/4 box-content">
+        <div className="flex gap-8 bg-white border p-4 w-3/4 box-content">
             <div>
                 <Image width={64} height={64} src={profileImage} alt="No Profile Found"/>
             </div>
             <div className="flex flex-col gap-4 flex-1">
                 <div className="flex gap-2">
-                    <div className="text-[#438bc5] hover:underline hover:cursor-pointer font-bold">{ author }</div>
+                    <a href={`https://www.youtube.com/${author}`} target="_blank" className="text-[#438bc5] hover:underline hover:cursor-pointer font-bold">{ author }</a>
                     <div className="text-[#999]">{ dayjs(publishedAt).fromNow() }</div>
                 </div>
                 <div className="">
