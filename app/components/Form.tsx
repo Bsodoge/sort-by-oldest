@@ -1,6 +1,8 @@
 'use client'
 
 import { FormEvent,  useState } from "react"
+import loading from "../../public/loading.gif"
+import Image from "next/image";
 
 export default function Form({ setComments }: any) {
     const [link, setLink] = useState("");
@@ -40,7 +42,7 @@ export default function Form({ setComments }: any) {
                 : <></> 
             }
             <input type="text" value={link} onChange={e => setLink(e.target.value)} className="text-black py-2 px-2 border-[#dedede] border-2 text-lg" required />
-            { load ? <></> : <button className="button">Retrieve comments</button> }
+            { load ? <Image height={30} width={30} src={loading} alt="loading" className="self-center"/> : <button className="button">Retrieve comments</button> }
         </form>
     )
 }
