@@ -12,10 +12,12 @@ export default function Form({ setComments }: any) {
         e.preventDefault();
         try {
             setError(false);
+            setLoad(true);
             let re = /(https?:\/\/)?(((m|www)\.)?(youtube(-nocookie)?|youtube.googleapis)\.com.*(v\/|v=|vi=|vi\/|e\/|embed\/|user\/.*\/u\/\d+\/)|youtu\.be\/)([_0-9a-z-]+)/i;
             let videoId = link.match(re)![8]; //https://stackoverflow.com/questions/3452546/how-do-i-get-the-youtube-video-id-from-a-url/51870158#51870158
             if(!videoId) {
                 setError(true);
+                setLoad(false);
                 return;
             }
             setLoad(true);
@@ -28,11 +30,12 @@ export default function Form({ setComments }: any) {
             setComments(allComments);
             console.log(allComments)
         } catch (error) {
-            setError(true);    
+            setError(true);   
+            setLoad(false); 
         }
     }
     return (
-        <form onSubmit={submit} className="flex flex-col w-[20rem] h-20 gap-4">
+        <form onSubmit={submit} className="flex flex-col w-[20rem] min-h-20 max-h-40 gap-4">
             { 
                 error ? 
                 <div className="bg-[#a93630] border-[#a11b1b] text-white px-1 py-2 flex items-center gap-4 rounded-sm">

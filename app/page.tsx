@@ -13,8 +13,8 @@ export default function Home() {
       </header>
       <div className="flex flex-col gap-6 items-center justify-center">
         <div className="text-center">
-          <h1 className="text-3xl">Sort by Oldest</h1>
-          <h2>Find comments from a <em className="italic">long</em> time ago...</h2>
+          <h1 className="text-5xl">Sort by Oldest</h1>
+          <h2 className="text-2xl">Find comments from a <em className="italic">long</em> time ago...</h2>
         </div>
         <Form setComments={setComments}></Form>
         <div className="flex flex-col p-0 w-full mt-10 sm:w-3/4 sm:p-10 sm:items-center ">
