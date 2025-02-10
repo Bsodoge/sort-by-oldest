@@ -6,7 +6,7 @@ import Image from "next/image";
 export default function Comment({ content, publishedAt, author, likes, profileImage }: any) {
     dayjs.extend(relativeTime);
     return(
-        <div className="flex gap-8 bg-white border p-4 w-3/4 box-content">
+        <div className="flex gap-8 bg-white border p-4 box-content sm:w-3/4 ">
             <div>
                 <Image width={64} height={64} src={profileImage} alt="No Profile Found"/>
             </div>
