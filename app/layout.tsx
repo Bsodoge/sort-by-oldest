@@ -24,9 +24,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#f1f1f1]`}
-      >
+      <head>
+        <link rel="apple-touch-icon" href="/apple-icon.png" type="image/png" sizes="180x180"/>
+      </head>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#f1f1f1] max-w-screen overflow-x-hidden`}>
         {children}
       </body>
     </html>
