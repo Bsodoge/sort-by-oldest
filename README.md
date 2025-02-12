@@ -19,3 +19,7 @@ UPSTASH_REDIS_REST_TOKEN=""
 ```
 
 The website should now be working.
+
+## Find a bug?
+
+This is an open source project so you're welcome to open a pull request for any bugs you find. Just make sure to open an issue first describing the bug.
