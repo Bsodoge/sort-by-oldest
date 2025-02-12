@@ -41,7 +41,7 @@ export default function Form({ setComments }: any) {
                 error.length ? 
                 <div className="bg-[#a93630] border-[#a11b1b] text-white px-1 py-2 flex items-center gap-4 rounded-sm">
                     <div className="error-icon"></div>
-                    <span>Please enter a valid youtube URL</span>
+                    <span>{ error }</span>
                 </div> 
                 : <></> 
             }
