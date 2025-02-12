@@ -4,7 +4,7 @@ import { ipAddress } from "@vercel/functions";
 import dayjs from "dayjs";
 import { google } from "googleapis";
 
-const youtube = google.youtube({version: "v3", auth: process.env.API_KEY});
+const youtube = google.youtube({version: "v3", auth: process.env.YOUTUBE_API_KEY});
 
 const rateLimit = new Ratelimit({
   redis: Redis.fromEnv(),
