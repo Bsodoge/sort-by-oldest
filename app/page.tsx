@@ -3,13 +3,17 @@
 import { useState } from "react";
 import Form from "./components/Form";
 import Comment from "./components/Comment";
+import github from "../public/github-mark.svg"
+import Image from "next/image";
 
 export default function Home() {
   const [comments, setComments] = useState([]);
   return (
     <div className="text-black">
-      <header className="flex">
-          <img src="" alt="Github Logo" />
+      <header className="flex p-2">
+        <a href="https://github.com/Bsodoge/sort-by-oldest" target="_blank">
+          <Image width={32} height={32} src={github} alt="Github Logo" className=""/>
+        </a>
       </header>
       <div className="flex flex-col gap-6 items-center justify-center">
         <div className="text-center">
