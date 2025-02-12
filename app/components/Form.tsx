@@ -7,17 +7,17 @@ import Image from "next/image";
 export default function Form({ setComments }: any) {
     const [link, setLink] = useState("");
     const [load, setLoad] = useState(false);
-    const [error, setError] = useState(false);
+    const [error, setError] = useState("");
     const submit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            setError(false);
+            setError("");
             setLoad(true);
             setComments([]);
             let re = /(https?:\/\/)?(((m|www)\.)?(youtube(-nocookie)?|youtube.googleapis)\.com.*(v\/|v=|vi=|vi\/|e\/|embed\/|user\/.*\/u\/\d+\/)|youtu\.be\/)([_0-9a-z-]+)/i;
             let videoId = link.match(re)![8]; //https://stackoverflow.com/questions/3452546/how-do-i-get-the-youtube-video-id-from-a-url/51870158#51870158
             if(!videoId) {
-                setError(true);
+                setError("Youtube URL is invalid. Please try again.");
                 setLoad(false);
                 return;
             }
@@ -31,14 +31,14 @@ export default function Form({ setComments }: any) {
             setComments(allComments);
             console.log(allComments)
         } catch (error) {
-            setError(true);   
+            setError("An error has occured, Please try a video with less comments.");   
             setLoad(false); 
         }
     }
     return (
         <form onSubmit={submit} className="flex flex-col w-[20rem] min-h-20 max-h-40 gap-4">
             { 
-                error ? 
+                error.length ? 
                 <div className="bg-[#a93630] border-[#a11b1b] text-white px-1 py-2 flex items-center gap-4 rounded-sm">
                     <div className="error-icon"></div>
                     <span>Please enter a valid youtube URL</span>
