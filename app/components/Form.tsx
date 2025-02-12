@@ -45,7 +45,7 @@ export default function Form({ setComments }: any) {
                 </div> 
                 : <></> 
             }
-            <input type="text" value={link} onChange={e => setLink(e.target.value)} className="text-black py-2 px-2 border-[#dedede] border-2 text-lg" required />
+            <input type="text" value={link} onChange={e => setLink(e.target.value)} className="text-black py-2 px-2 border-[#dedede] border-2 text-lg" placeholder="Enter YouTube URL here" required />
             { load ? <Image height={30} width={30} src={loading} alt="loading" className="self-center"/> : <button className="button">Retrieve comments</button> }
         </form>
     )
