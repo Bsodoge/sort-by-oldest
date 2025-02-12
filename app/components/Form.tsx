@@ -31,7 +31,7 @@ export default function Form({ setComments }: any) {
             setComments(allComments);
             console.log(allComments)
         } catch (error) {
-            setError("An error has occured, Please try a video with less comments.");   
+            setError("An error has occured, Please try another video.");   
             setLoad(false); 
         }
     }
