@@ -5,9 +5,9 @@ import loading from "../../public/loading.gif"
 import Image from "next/image";
 
 export default function Form({ setComments }: any) {
-    const [link, setLink] = useState("");
-    const [load, setLoad] = useState(false);
-    const [error, setError] = useState("");
+    const [link, setLink] = useState<string>("");
+    const [load, setLoad] = useState<boolean>(false);
+    const [error, setError] = useState<string>("");
     const submit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
